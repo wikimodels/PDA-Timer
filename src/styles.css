@@ -1,0 +1,203 @@
+/* You can add global styles to this file, and also import other style files */
+@import "@angular/material/prebuilt-themes/deeppurple-amber.css";
+
+html,
+body {
+  height: 100%;
+  background-color: #0a0525;
+}
+body {
+  margin: 0;
+  font-family: Roboto, "Helvetica Neue", sans-serif;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+}
+
+/* REMOVES TICKS FROM SLIDER */
+.mat-slider-has-ticks.cdk-focused:not(.mat-slider-disabled) .mat-slider-ticks,
+.mat-slider-has-ticks:hover:not(.mat-slider-disabled) .mat-slider-ticks {
+  opacity: 0 !important;
+}
+.mat-dialog-container {
+  padding: 25px !important;
+  /* background: #63d471 !important; */
+  color: grey !important;
+}
+.mat-column-date {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 1 0 8% !important;
+  width: 100% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+.mat-form-field-appearance-legacy.mat-form-field-can-float.mat-form-field-should-float
+  .mat-form-field-label:not(.mat-empty):not(.mat-form-field-empty) {
+  font-size: 20px;
+}
+
+.session-card {
+  background-color: #3a3c3e;
+  color: whitesmoke;
+  padding: 10px;
+  margin: 3px auto;
+  border-radius: 5px;
+  width: 100%;
+}
+.controls-card {
+  background-color: #3a3c3e;
+  color: whitesmoke;
+  padding: 3px;
+  margin: 3px auto;
+  border-radius: 5px;
+  width: 100%;
+}
+.controls-input-field {
+  font-size: 20px !important;
+  text-align: center !important;
+  width: 50px !important;
+  background-color: #3a3c3e !important;
+  color: whitesmoke !important;
+  border: none !important;
+}
+
+.water-controls-input-field {
+  font-size: 20px !important;
+  text-align: center !important;
+  width: 50px !important;
+  background-color: #3a3c3e !important;
+  color: whitesmoke !important;
+  border: none !important;
+}
+
+.controls-label {
+  padding-left: 8px;
+}
+
+.delete-controls-label {
+  padding-left: 8px;
+  padding-right: 14px;
+}
+.session-label {
+  padding-left: 0px;
+}
+
+.table-controls-card {
+  background-color: #3a3c3e;
+  color: whitesmoke;
+  padding: 3px;
+  margin: 3px auto;
+  border-radius: 5px;
+}
+
+.table-controls-card-warning {
+  background-color: #e6385e;
+  color: whitesmoke;
+  padding: 3px;
+  margin: 3px auto;
+  border-radius: 5px;
+}
+
+.large-card {
+  margin-left: 10px;
+  margin-right: 10px;
+  margin-top: 5px;
+  margin-bottom: 5px;
+}
+.small-card {
+  width: 100%;
+}
+
+.small-card-1 {
+  width: 33%;
+}
+
+.data-table-container {
+  margin-top: 70px;
+}
+.table-controls-container {
+  margin-bottom: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+}
+
+.mat-select-value,
+.mat-select-arrow {
+  color: whitesmoke !important;
+}
+
+.mat-focused .mat-form-field-label {
+  color: whitesmoke !important;
+}
+.mat-form-field-ripple {
+  background-color: whitesmoke !important;
+}
+.mat-menu-panel,
+.mat-select-panel,
+.mat-dialog-container {
+  background-color: #f3f7fc !important;
+}
+
+.mat-button.mat-whitesmoke {
+  color: whitesmoke;
+}
+
+.info-snackbar {
+  color: whitesmoke;
+  background-color: #1f865b;
+}
+.warning-snackbar {
+  color: whitesmoke;
+  background-color: #e6385e;
+}
+
+/* INPUT FIELD STYLING*/
+.mat-form-field {
+  color: whitesmoke;
+}
+.mat-form-field-underline {
+  background-color: whitesmoke !important;
+}
+.mat-form-field-empty.mat-form-field-label {
+  color: whitesmoke !important;
+}
+.mat-form-field-placeholder {
+  color: whitesmoke !important;
+}
+.mat-focused .mat-form-field-placeholder {
+  color: whitesmoke;
+}
+.mat-checkbox-inner-container {
+  background-color: whitesmoke !important;
+}
+
+.mat-paginator {
+  color: whitesmoke;
+  background-color: #0a0525;
+}
+
+.mat-select {
+  color: whitesmoke;
+}
+.mat-select-value {
+  color: whitesmoke;
+}
+
+.mat-select-trigger {
+  color: whitesmoke;
+}
+
+.mat-select-arror-wrapper {
+  color: whitesmoke;
+}

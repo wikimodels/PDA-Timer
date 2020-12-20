@@ -1,0 +1,29 @@
+<mat-dialog-content>
+  <h1>Exercise is done!</h1>
+  <div fxLayout="row" fxLayoutAlign="space-between center" class="controls-card">
+    <label for="input" class="controls-label">Water Vol.</label>
+    <div fxLayout="row" fxLayoutAlign="space-between center">
+      <input
+        matInput
+        readonly="readonly"
+        type="number"
+        [formControl]="waterVolFormCtrl"
+        class="water-controls-input-field"
+      />
+      <div>
+        <button mat-icon-button (click)="substract()">
+          <mat-icon>remove</mat-icon>
+        </button>
+      </div>
+      <div>
+        <button mat-icon-button (click)="add()">
+          <mat-icon>add</mat-icon>
+        </button>
+      </div>
+    </div>
+  </div>
+
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="submitData()" color="standart">Close</button>
+</mat-dialog-actions>

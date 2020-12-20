@@ -1,0 +1,17 @@
+<div fxLayout="colunm" fxLayoutAlign="space-around center" style="width: 100%; height: 500px">
+  <form class="user-form" [formGroup]="userForm" (ngSubmit)="onSubmit()">
+    <div fxLayout='column' fxLayoutAlign='space-around end'>
+      <mat-form-field class="user-form-full-width">
+        <mat-label>Enter your Email</mat-label>
+        <input matInput placeholder="Email" formControlName="email">
+        <mat-error *ngIf="userForm.hasError('email') && !userForm.hasError('required')">
+          Enter a <i>valid email address</i>
+        </mat-error>
+        <mat-error *ngIf="userForm.hasError('required')">
+          Email is <i>required</i>
+        </mat-error>
+      </mat-form-field>
+      <button mat-button type="submit" [disabled]="userForm.invalid">Submit</button>
+    </div>
+  </form>
+</div>

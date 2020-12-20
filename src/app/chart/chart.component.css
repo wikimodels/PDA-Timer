@@ -1,0 +1,45 @@
+.chart {
+  background-color: #0a0525;
+  width: 100%;
+}
+.inhaleRect {
+  fill: #55f07b;
+}
+.exhaleRect {
+  fill: #5566f0;
+}
+.abbsRect {
+  fill: #f05590;
+}
+.ticktackRect {
+  fill: goldenrod;
+}
+.outline {
+  stroke: whitesmoke;
+  stroke-width: 2;
+}
+.lines {
+  stroke-width: 0.5;
+  stroke: whitesmoke;
+}
+.labels {
+  fill: whitesmoke;
+}
+/* Screen Width >= 400 */
+
+@media only screen and (max-width: 400px) and (min-width: 300px) {
+  .chart-top {
+    padding-top: 35px;
+  }
+}
+@media only screen and (min-width: 401px) and (max-width: 499px) {
+  .chart-top {
+    padding-top: 35px;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .chart-top {
+    padding-top: 100px;
+  }
+}

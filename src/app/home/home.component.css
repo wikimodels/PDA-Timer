@@ -1,0 +1,20 @@
+@media only screen and (max-width: 400px) and (min-width: 300px) {
+  .controls-panel {
+    width: 90%;
+  }
+  .chart-container {
+    width: 100%;
+  }
+}
+
+@media only screen and (min-width: 401px) and (max-width: 499px) {
+  .controls-panel {
+    width: 90%;
+  }
+}
+
+@media only screen and (min-width: 500px) {
+  .controls-panel {
+    width: 30%;
+  }
+}

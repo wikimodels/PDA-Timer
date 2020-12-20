@@ -1,0 +1,38 @@
+{
+    "pdaSimpleDefault" : 7,
+    "pdaComplexDefault": 6,
+    "exhaleComplexDefault": 6,
+    "inhaleDefault": 2,
+    "finalStopwatchDigitValue": 0.1,
+    "abbsDefault": 2,
+    "sessionsApi": {
+                    "sessions": [],
+                    "total_count": 0
+                  },
+    "sortChange": {
+                    "previousPageIndex": 0,
+                    "pageIndex": 0,
+                    "pageSize": 5,
+                    "length": 0
+                  },
+    "sortedItem" : {
+                    "active": "date",
+                    "direction": "desc"
+                  },
+    "stopwatch": {
+                    "hours": { "digit1": "0", "digit2": "0"},
+                    "minutes": { "digit1": "0", "digit2": "0" },
+                    "seconds": { "digit1": "0", "digit2": "0" }
+                  },
+    "waterVolume": 1,
+    "IDBName": "pdadb",
+    "IDBPostSyncName": "pdadbpostsync",
+    "IDBDelSyncName": "pdadbdelsync",
+    "IDBObjectStore": "sessions",
+    "IDBCurrentUserName": "currentuser",
+    "adminPanleUsersApi": {
+      "adminPanelUsers": [],
+      "adminPanelUsersCount": 0
+    }
+
+}

@@ -1,0 +1,14 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" style="width: 100%">
+  <button mat-button (click)="start()" color="whitesmoke">
+    <span style="font-size: larger">Start</span>
+  </button>
+  <button mat-button (click)="pause()" color="whitesmoke">
+    <span style="font-size: larger">Pause</span>
+  </button>
+  <button mat-button (click)="stop()" color="whitesmoke">
+    <span style="font-size: larger">Stop</span>
+  </button>
+  <div>
+    <mat-slide-toggle (change)="onSliderChange($event)" #isComplexChart [disabled]="isDisabled">Задержка</mat-slide-toggle>
+
+</div>

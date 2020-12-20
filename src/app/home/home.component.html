@@ -1,0 +1,18 @@
+
+<div
+  fxLayout.xs="column"
+  fxLayout="row"
+  fxLayoutAlign="space-around center"
+  fxLayoutGap="10px"
+>
+   <div class='chart-container'>
+    <app-chart [chartControls]="chartControls" (userAction)="passAction($event)"></app-chart>
+  </div>
+  <div fxLayout="column" fxLayoutAlign="space-around" class="controls-panel">
+    <app-start-pause-stop [chartControls]="chartControls" (userAction)="passAction($event)"></app-start-pause-stop>
+    <app-session-duration-controls [runningStopwatch]="chartControls.runningStopwatch"[finalStopwatch]="chartControls.finalStopwatch"></app-session-duration-controls>
+    <app-pda-controls></app-pda-controls>
+    <app-inhale-controls></app-inhale-controls>
+    <app-abbs-controls></app-abbs-controls>
+  </div>
+</div>

@@ -1,0 +1,6 @@
+<div class="data-table-container">
+  <div *ngIf="(sessionStore.userSubj$|async).email" fxLayout="row" fxLayoutAlign="space-around">
+    <h3>Hello, {{(sessionStore.userSubj$|async).email}}!</h3>
+  </div>
+  <app-data-table></app-data-table>
+</div>

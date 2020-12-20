@@ -1,0 +1,208 @@
+<div fxLayout='row' fxLayout.xs='column' fxFlexAlign='space-between' class='table-controls-container'>
+  <div fxLayout='row' fxLayout.xs='column'>
+    <!-- PDA -->
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="table-controls-card" ngClass='large-card'
+      ngClass.xs='small-card'>
+      <label for="input" class="controls-label">PDA</label>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <button mat-icon-button (click)="removePDAColumn()">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-icon-button (click)="addPDAColumn()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- INHALE -->
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="table-controls-card" ngClass='large-card'
+      ngClass.xs='small-card'>
+      <label for="input" class="controls-label">Inhale</label>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <button mat-icon-button (click)="removeInhaleColumn()">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-icon-button (click)="addInhaleColumn()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- ABBS -->
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="table-controls-card" ngClass='large-card'
+      ngClass.xs='small-card'>
+      <label for="input" class="controls-label">Abbs</label>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <button mat-icon-button (click)="removeAbbsColumn()">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-icon-button (click)="addAbbsColumn()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <div fxLayout='row' fxLayoutAlign='space-around'>
+    <!-- WATER VOLUME -->
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="table-controls-card" ngClass='large-card'
+      ngClass.xs='small-card-1'>
+      <label for="input" class="controls-label">
+        <mat-icon>
+          invert_colors
+        </mat-icon>
+      </label>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <button mat-icon-button (click)="removeWaterVolColumn()">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-icon-button (click)="addWaterVolColumn()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- SESSION START TIME -->
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="table-controls-card" ngClass='large-card'
+      ngClass.xs='small-card-1'>
+      <label for="input" class="controls-label">
+        <mat-icon>
+          schedule
+        </mat-icon>
+      </label>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <button mat-icon-button (click)="removeTimeColumn()">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-icon-button (click)="addTimeColumn()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- DELETE RECORD -->
+    <div fxLayout="row" fxLayoutAlign="space-between center" class="table-controls-card" ngClass='large-card'
+      ngClass.xs='small-card-1'>
+      <label for="input" class="controls-label">
+        <mat-icon>
+          delete
+        </mat-icon>
+      </label>
+      <div fxLayout="row" fxLayoutAlign="space-between center">
+        <div>
+          <button mat-icon-button (click)="removeDeleteColumn()">
+            <mat-icon>remove</mat-icon>
+          </button>
+        </div>
+        <div>
+          <button mat-icon-button (click)="addDeleteColumn()">
+            <mat-icon>add</mat-icon>
+          </button>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</div>
+
+
+
+
+<!-- TABLE -->
+<div fxLayout="column" fxLayoutAlign="center space-around" class="example-container mat-elevation-z8">
+
+  <div class="example-table-container">
+    <table mat-table [dataSource]="sessions" class="example-table" matSort matSortActive="created" matSortDisableClear
+      matSortDirection="desc" class="data-table">
+      <!-- Date Column -->
+      <ng-container matColumnDef="displayDate">
+        <th mat-header-cell *matHeaderCellDef width='10%' mat-sort-header disableClear>
+          Date
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.displayDate }}</td>
+      </ng-container>
+
+      <!-- Time Column -->
+      <ng-container matColumnDef="displayTime">
+        <th mat-header-cell *matHeaderCellDef width='10%' mat-sort-header disableClear>
+          <div class='colomn-header'>
+            <div>Time</div>
+          </div>
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.displayTime }}</td>
+      </ng-container>
+
+      <!-- InhaleTime Column -->
+      <ng-container matColumnDef="inhaleTime">
+        <th mat-header-cell *matHeaderCellDef width='10%' mat-sort-header>Inhale</th>
+        <td mat-cell *matCellDef="let row">{{ row.inhaleTime }}</td>
+      </ng-container>
+
+      <!-- PDATime Column -->
+      <ng-container matColumnDef="pdaTime">
+        <th mat-header-cell *matHeaderCellDef width='10%' mat-sort-header disableClear>PDA</th>
+        <td mat-cell *matCellDef="let row">{{ row.pdaTime }}</td>
+      </ng-container>
+
+      <!-- Abss Column -->
+      <ng-container matColumnDef="abbsTime">
+        <th mat-header-cell *matHeaderCellDef width='10%' mat-sort-header disableClear>
+          Abbs
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.abbsTime }}</td>
+      </ng-container>
+
+      <!-- WaterVol Column -->
+      <ng-container matColumnDef="waterVol">
+        <th mat-header-cell *matHeaderCellDef width='10%' mat-sort-header disableClear>
+          Water Vol.
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.waterVol }}</td>
+      </ng-container>
+
+      <!-- SessionDuration Column -->
+      <ng-container matColumnDef="sessionDuration">
+        <th mat-header-cell *matHeaderCellDef width='10%' mat-sort-header disableClear>
+          Dur.
+        </th>
+        <td mat-cell *matCellDef="let row">{{ row.sessionDuration }} min.</td>
+      </ng-container>
+
+      <!-- SessionId Column -->
+      <ng-container matColumnDef="sessionId">
+        <th mat-header-cell *matHeaderCellDef width='10%'>
+          Del.
+        </th>
+        <td mat-cell *matCellDef="let row">
+          <button mat-icon-button (click)="deleteSession(row)">
+            <mat-icon>delete_outline</mat-icon>
+          </button>
+        </td>
+      </ng-container>
+      <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+      <tr mat-row *matRowDef="let row; columns: displayedColumns" [@fadeInOut]></tr>
+    </table>
+  </div>
+
+  <mat-paginator class="data-table" [length]="resultsLength" [pageSizeOptions]="[5, 10]"></mat-paginator>
+</div>

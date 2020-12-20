@@ -1,0 +1,72 @@
+<div fxLayout="row" fxLayoutAlign="space-around">
+  <svg
+    version="1.1"
+    xmlns="http://www.w3.org/2000/svg"
+    [attr.width]="svg.width"
+    [attr.height]="svg.height"
+    [attr.viewBox]="svg.viewBox()"
+    id="mySvg"
+    class="chart chart-top"
+  >
+     <g [attr.transform]="canvas.linesGroup()" id="linesGroup">
+      <line
+        *ngFor="let line of chartDesignService.linesCoordinatesSubj$ | async"
+        [attr.x1]="line.x1"
+        [attr.y1]="line.y1"
+        [attr.x2]="line.x2"
+        [attr.y2]="line.y2"
+        class="lines"
+      />
+      <text
+        *ngFor="let label of chartDesignService.labesCoordinatesSubj$ | async"
+        [attr.x]="label.x"
+        [attr.y]="label.y"
+        class="labels"
+      >
+        {{ label.value }}
+      </text>
+    </g>
+      <!-- RECTS -->
+     <g [attr.transform]="canvas.rectGroup()" id="rectGroup">
+        <rect
+          *ngFor="let figure of chartDesignService.figuresSubj$ | async"
+          [attr.id]="figure.rect.id"
+          [attr.x]="figure.rect.x"
+          y="0"
+          [attr.class]="figure.rect.class"
+          [style.width.px]="figure.rect.width"
+          [style.height.px]="figure.rect.height"
+        >
+        </rect>
+    </g>
+
+    <!-- OUTLINES -->
+    <g [attr.transform]="canvas.rectGroup()" id="outlinesGroup">
+      <line
+        *ngFor="let figure of chartDesignService.figuresSubj$ | async"
+        [attr.x1]="figure.outlines.rightOutline.x1"
+        [attr.y1]="figure.outlines.rightOutline.y1"
+        [attr.x2]="figure.outlines.rightOutline.x2"
+        [attr.y2]="figure.outlines.rightOutline.y2"
+        class="outline"
+      />
+      <line
+        *ngFor="let figure of chartDesignService.figuresSubj$ | async"
+        [attr.x1]="figure.outlines.topOutline.x1"
+        [attr.y1]="figure.outlines.topOutline.y1"
+        [attr.x2]="figure.outlines.topOutline.x2"
+        [attr.y2]="figure.outlines.topOutline.y2"
+        class="outline"
+      />
+      <line
+        *ngFor="let figure of chartDesignService.figuresSubj$ | async"
+        [attr.x1]="figure.outlines.leftOutline.x1"
+        [attr.y1]="figure.outlines.leftOutline.y1"
+        [attr.x2]="figure.outlines.leftOutline.x2"
+        [attr.y2]="figure.outlines.leftOutline.y2"
+        class="outline"
+      />
+    </g>
+  </svg>
+</div>
+

@@ -1,0 +1,14 @@
+{
+  "projects": {
+    "default": "pda-timer"
+  },
+  "targets": {
+    "pda-timer": {
+      "hosting": {
+        "pda-timer": [
+          "pda-timer"
+        ]
+      }
+    }
+  }
+}

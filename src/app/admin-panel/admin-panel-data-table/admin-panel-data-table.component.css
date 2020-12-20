@@ -1,0 +1,94 @@
+table {
+  width: 100%;
+}
+table,
+th,
+td {
+  color: whitesmoke;
+  background-color: #0a0525;
+}
+
+.mat-paginator {
+  color: whitesmoke;
+  background-color: #0a0525;
+}
+
+.mat-select {
+  color: whitesmoke;
+}
+.mat-select-value {
+  color: whitesmoke;
+}
+.mat-option-text {
+  color: whitesmoke;
+}
+.mat-select-trigger {
+  color: whitesmoke;
+}
+
+.mat-select-arror-wrapper {
+  color: whitesmoke;
+}
+
+.input-field {
+  min-width: 300px;
+}
+
+/* Column Widths */
+.mat-column-date {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 22% !important;
+  width: 22% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.mat-column-sessionDuration {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 15% !important;
+  width: 15% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}
+
+.search-controls-container {
+  margin-left: 30px;
+}
+.search-controls-container-xs {
+  margin-left: 0px;
+}
+.mat-column-inhaleTime,
+.mat-column-pdaTime,
+.mat-column-abbsTime,
+.mat-column-waterVol,
+.mat-column-id {
+  word-wrap: break-word !important;
+  white-space: unset !important;
+  flex: 0 0 12% !important;
+  width: 12% !important;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+
+  word-break: break-word;
+
+  -ms-hyphens: auto;
+  -moz-hyphens: auto;
+  -webkit-hyphens: auto;
+  hyphens: auto;
+}

@@ -1,0 +1,22 @@
+<div fxLayout="row" fxLayoutAlign="space-between center" class="controls-card">
+  <label for="input" class="controls-label">Inhale (sec)</label>
+  <div fxLayout="row" fxLayoutAlign="space-between center">
+    <input
+      matInput
+      readonly="readonly"
+      type="number"
+      [formControl]="inhaleFormCtrl"
+      class="controls-input-field"
+    />
+    <div>
+      <button mat-icon-button (click)="substract()">
+        <mat-icon>remove</mat-icon>
+      </button>
+    </div>
+    <div>
+      <button mat-icon-button (click)="add()">
+        <mat-icon>add</mat-icon>
+      </button>
+    </div>
+  </div>
+</div>

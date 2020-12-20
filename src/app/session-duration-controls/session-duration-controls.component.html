@@ -1,0 +1,26 @@
+<div fxLayout="row" fxLayoutAlign="space-between start" class="session-card">
+  <div
+    fxLayout="column"
+    fxLayoutAlign="space-between start"
+    class="session-label"
+  >
+    <label for="input">Session Duration (min : sec)</label>
+    <!-- STOPWATCH -->
+    <!-- <app-stopwatch></app-stopwatch> -->
+    <div fxLayout="row" fxLayoutAlign="space-around center" style="font-size: 20px">
+      {{ runningStopwatch.minutes.digit1 }}{{ runningStopwatch.minutes.digit2 }} :
+      {{ runningStopwatch.seconds.digit1 }}{{ runningStopwatch.seconds.digit2 }}
+      |
+      {{ finalStopwatch.minutes.digit1 }}{{ finalStopwatch.minutes.digit2 }} :
+      {{ finalStopwatch.seconds.digit1 }}{{ finalStopwatch.seconds.digit2 }}
+    </div>
+  </div>
+  <div fxLayout="row" fxLayoutAlign="space-between">
+    <button mat-icon-button (click)="substract()">
+      <mat-icon>remove</mat-icon>
+    </button>
+    <button mat-icon-button (click)="add()">
+      <mat-icon>add</mat-icon>
+    </button>
+  </div>
+</div>
