@@ -62,7 +62,6 @@ export class SessionsStore {
           return of(error);
         }),
         map((user: User) => {
-          console.log('user', user);
           const array = user['sessions'].map((session: Session) => {
             const obj: Session = {
               _id: session._id,
@@ -91,7 +90,6 @@ export class SessionsStore {
         })
       )
       .subscribe((user) => {
-        console.log('USER', user);
         this.setUser(user);
       });
   }
@@ -111,7 +109,6 @@ export class SessionsStore {
   sessionsFromIndexedDB$(email) {
     return from(this.dexieIDBService.getAllSessionsFromPdaDb(email)).pipe(
       map((sessions: Session[]) => {
-        console.log('Sessions from IndexedDB', sessions);
         const user: User = {
           email: email,
           sessions: sessions,
@@ -120,7 +117,6 @@ export class SessionsStore {
         return user;
       }),
       catchError((error) => {
-        console.log('IndexDb sessions error', error);
         const defaultUser = { email: email, sessions: [], total_count: 0 };
         return of(defaultUser);
       })
@@ -129,7 +125,6 @@ export class SessionsStore {
 
   async postSession() {
     const currentUser = await this.dexieOpsService.getCurrentUserFromUserDb();
-    console.log('currentUser', currentUser);
 
     const session: Session = {
       email: currentUser.email,
@@ -168,7 +163,7 @@ export class SessionsStore {
   sessionToCloud$(session: Session) {
     return this.http.post<Session>(ADD_SESSION_FOR_USER(), session).pipe(
       catchError((error) => {
-        console.log('YOUR SHITTY ERROR', error);
+        console.log('YOUR   ERROR', error);
         this.dexieIDBService.addSessionToPostSync(session);
         this.backgroundSync();
         return of(session);
@@ -190,7 +185,6 @@ export class SessionsStore {
       .pipe(
         switchMap(() => this.deleteFromCloud$(sessionToDelete)),
         finalize(() => {
-          console.log('ROW from delete session', row);
           this.getAllSessions(row.email);
         })
       )
@@ -207,7 +201,7 @@ export class SessionsStore {
       )
       .pipe(
         catchError((error) => {
-          console.log('YOUR SHITTY delete session ERROR', error);
+          console.log('YOUR delete session ERROR', error);
           this.dexieIDBService.addSessionToDelSync(sessionToDelete);
           this.backgroundSync();
           return of(sessionToDelete);
@@ -224,7 +218,6 @@ export class SessionsStore {
   private getSessionToDelete(row: Session) {
     let user = this.getUser();
     let sessions = user.sessions.filter((s) => s.sessionId === row.sessionId);
-    console.log('ESSS', sessions);
     return sessions[0];
   }
 

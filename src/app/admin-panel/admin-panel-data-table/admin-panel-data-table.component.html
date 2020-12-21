@@ -83,7 +83,7 @@
       </label>
       <div>
         <button mat-icon-button (click)="deleteUsers()">
-          <mat-icon>delete</mat-icon>
+          <mat-icon>delete_outline</mat-icon>
         </button>
       </div>
     </div>
@@ -145,7 +145,7 @@
         <th mat-header-cell *matHeaderCellDef width='10%'>
           <div fxLayout="row" fxLayoutAlign="start center">
             <mat-icon style="margin-right:5px;">delete</mat-icon>
-            <mat-checkbox class="example-margin" [checked]="allToBeDeleted" color="accent"
+            <mat-checkbox class="example-margin" [checked]="dataTableService.allToBeDeletedSubj$ | async" color="accent"
               [indeterminate]="someToBeDeleted()" (change)="setAllToBeDeleted($event.checked)">
             </mat-checkbox>
           </div>

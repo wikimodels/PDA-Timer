@@ -12,11 +12,23 @@ import * as defaults from '../../assets/utils/defaults.json';
 })
 export class AdminPanelDataTableService {
   previousDirection = 'desc';
-
   private _showDeleteUsersButtonSubj = new BehaviorSubject(false);
+
   showDeleteUsersButtonSubj$ = this._showDeleteUsersButtonSubj.asObservable();
+
   setShowDeleteButton(value: boolean) {
     this._showDeleteUsersButtonSubj.next(value);
+  }
+  private _allToBeDeletedSubj = new BehaviorSubject(false);
+
+  allToBeDeletedSubj$ = this._allToBeDeletedSubj.asObservable();
+
+  getAllToBeDeletedSubj() {
+    return this._allToBeDeletedSubj.getValue();
+  }
+
+  setAllToBeDeletedSubj(value: boolean) {
+    this._allToBeDeletedSubj.next(value);
   }
 
   tableData$(
@@ -31,18 +43,20 @@ export class AdminPanelDataTableService {
     ).pipe(
       map((value) => {
         let [adminPanelUsersApi, page, sort] = value;
+        // adminPanelUsersApi['adminPanelUsers'].forEach(
+        //   (user) => (user.toBeDeleted = false)
+        // );
+        // this.setAllToBeDeletedSubj(false);
+
         const prop =
           sort['active'] === 'lastVisitDisplayDate'
             ? 'lastVisitDate'
             : sort['active'];
-        console.log('Property', prop);
 
         if (sort['direction'] === 'asc' && prop != 'lastVisitDate') {
-          adminPanelUsersApi['adminPanelUsers'].sort((a, b) => {
-            console.log('a[prop]', a[prop]);
-            console.log('b[prop]', b[prop]);
-            return a[prop] - b[prop];
-          });
+          adminPanelUsersApi['adminPanelUsers'].sort(
+            (a, b) => a[prop] - b[prop]
+          );
         }
         if (sort['direction'] === 'desc' && prop != 'lastVistDate') {
           adminPanelUsersApi['adminPanelUsers'].sort(

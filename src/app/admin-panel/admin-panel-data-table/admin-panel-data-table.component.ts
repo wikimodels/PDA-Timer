@@ -16,7 +16,9 @@ import {
 import { FormControl } from '@angular/forms';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-import { debounceTime } from 'rxjs/operators';
+import { of } from 'rxjs';
+import { from } from 'rxjs';
+import { debounceTime, startWith, switchMap, tap } from 'rxjs/operators';
 
 import { AdminPanelDataTableService } from 'src/app/services/admin-panel-data-table.service';
 import { AdminPanelService } from 'src/app/services/admin-panel.service';
@@ -52,7 +54,6 @@ import {
 export class AdminPanelDataTableComponent implements OnInit, AfterViewChecked {
   displayedColumns: string[] = ['email', 'lastVisitDisplayDate'];
   adminPanelUsers: AdminPanelUser[] = [];
-  //searchedAdminPanelUsers: AdminPanelUser[] = [];
   showButton = false;
   sortedItem: SortedItem = { active: 'date', direction: 'desc' };
   resultsLength = 0;
@@ -71,28 +72,47 @@ export class AdminPanelDataTableComponent implements OnInit, AfterViewChecked {
   ) {}
 
   ngOnInit() {
-    this.searchForm.valueChanges.pipe(debounceTime(200)).subscribe((search) => {
-      const users = this.adminPanelService.getAdminPanelUsersApi()
-        .adminPanelUsers;
-      const searchSelection = users.filter((user) =>
-        user.email.includes(search)
-      );
-      //All records that are not in searchSelection must be clear of toBeDeleted flage
-      this.clearOfToBeDeletedFlag(searchSelection);
-      setTimeout(() => {
-        this.adminPanelUsers = searchSelection;
-        this.resultsLength = searchSelection.length;
-        this.updateAllToBeDeleted();
-      }, 0);
-      //this.allToBeDeleted = false;
-    });
+    this.searchForm.valueChanges
+      .pipe(
+        debounceTime(400),
+        switchMap((value) => {
+          console.log('*****SEARCH VALUE', value);
+          const users = this.adminPanelService.getAdminPanelUsersApi()
+            .adminPanelUsers;
+          let searchSelection = users.filter((user) =>
+            user.email.includes(value)
+          );
+          searchSelection.forEach((item) => (item.toBeDeleted = false));
+          this.dataTableService.setAllToBeDeletedSubj(false);
+
+          const obj: AdminPanelUsersApi = {
+            adminPanelUsersCount: searchSelection.length,
+            adminPanelUsers: searchSelection,
+          };
+          return of(obj);
+        }),
+        switchMap((value) =>
+          this.dataTableService.tableData$(
+            of(value),
+            this.paginator.page,
+            this.sort.sortChange
+          )
+        )
+      )
+      .subscribe((value: AdminPanelUsersApi) => {
+        //console.log('****SUBSCR VALUE', val);
+        this.adminPanelUsers = value.adminPanelUsers;
+        this.resultsLength = value.adminPanelUsersCount;
+        //this.updateAllToBeDeleted();
+      });
   }
 
   ngAfterViewInit() {
     // If the user changes the sort order, reset back to the first page.
-    this.sort.sortChange.subscribe(() => {
+    this.sort.sortChange.subscribe((value) => {
       this.paginator.pageIndex = 0;
     });
+
     this.dataTableService
       .tableData$(
         this.adminPanelService.adminPanelUsersApiSubj$,
@@ -100,12 +120,10 @@ export class AdminPanelDataTableComponent implements OnInit, AfterViewChecked {
         this.sort.sortChange
       )
       .subscribe((value) => {
-        console.log('value from', value);
         this.adminPanelUsers = value.adminPanelUsers;
-        //this.searchedAdminPanelUsers = value.adminPanelUsers;
         this.resultsLength = value.adminPanelUsersCount;
-        console.log('adu', this.adminPanelUsers);
-        //console.log('sadu', this.searchedAdminPanelUsers);
+        this.adminPanelUsers.forEach((item) => (item.toBeDeleted = false));
+        this.dataTableService.setAllToBeDeletedSubj(false);
       });
   }
 
@@ -127,7 +145,6 @@ export class AdminPanelDataTableComponent implements OnInit, AfterViewChecked {
       let currentColumn = previousColumn > 0 ? previousColumn + 1 : 1;
       this.displayedColumns.splice(currentColumn, 0, 'lastVisitDisplayTime');
     }
-    console.log(this.displayedColumns);
   }
 
   addNumberOfSessionsColumn() {
@@ -181,32 +198,23 @@ export class AdminPanelDataTableComponent implements OnInit, AfterViewChecked {
 
   deleteUsers() {
     console.log(this.adminPanelUsers);
-    const usersIds = this.adminPanelUsers.reduce((array, cur) => {
-      if (cur.toBeDeleted) {
-        array.push(cur.email);
-      }
-      return array;
-    }, []);
-    console.log(usersIds);
     this.adminPanelService.deleteUsersByEmails(this.adminPanelUsers);
   }
 
   updateAllToBeDeleted() {
-    this.allToBeDeleted =
+    const allToBeDeleted =
       this.adminPanelUsers.length != 0 &&
       this.adminPanelUsers.every((u) => u.toBeDeleted);
+    this.dataTableService.setAllToBeDeletedSubj(allToBeDeleted);
   }
 
   setAllToBeDeleted(toBeDeleted: boolean) {
-    this.allToBeDeleted = toBeDeleted;
     if (this.adminPanelUsers.length == 0) {
       return;
     }
     this.adminPanelUsers.forEach((user) => (user.toBeDeleted = toBeDeleted));
     this.showDeleteUsersButton();
-    //this.dataTableService.setShowDeleteButton(toBeDeleted);
-    //this.showDeleteUsersButton = toBeDeleted;
-    //console.log('ALL to BE Deleted', this.showDeleteUsersButton);
+    this.dataTableService.setAllToBeDeletedSubj(toBeDeleted);
   }
 
   someToBeDeleted(): boolean {
@@ -215,29 +223,13 @@ export class AdminPanelDataTableComponent implements OnInit, AfterViewChecked {
     }
     const toBeDeleted =
       this.adminPanelUsers.filter((u) => u.toBeDeleted).length > 0 &&
-      !this.allToBeDeleted;
-    //this.showDeleteUsersButton = toBeDeleted;
-    //console.log('Some To Be Deleted Button', this.showDeleteUsersButton);
+      !this.dataTableService.getAllToBeDeletedSubj();
+
     this.showDeleteUsersButton();
     return toBeDeleted;
   }
 
-  clearOfToBeDeletedFlag(selectedUsers: AdminPanelUser[]) {
-    const users = this.adminPanelService.getAdminPanelUsersApi()
-      .adminPanelUsers;
-    users.forEach((u) => {
-      if (!selectedUsers.includes(u)) {
-        u.toBeDeleted = false;
-      }
-    });
-    const obj: AdminPanelUsersApi = {
-      adminPanelUsers: users,
-      adminPanelUsersCount: users.length,
-    };
-    this.adminPanelService.setAdminPanelUsersApi(obj);
-  }
-
-  showDeleteUsersButton() {
+  private showDeleteUsersButton() {
     this.showButton = this.adminPanelUsers.some(
       (value) => value.toBeDeleted === true
     );
