@@ -8,7 +8,7 @@ import { AppMaterialModule } from './material.module';
 import { ControlsComponent } from './controls/controls.component';
 import { SliderComponent } from './slider/slider.component';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { dbConfig } from './../assets/utils/dbConfig'
+import { dbConfig } from './../assets/utils/dbConfig';
 import { NgxIndexedDBModule } from 'ngx-indexed-db';
 
 import { ChartComponent } from './chart/chart.component';
@@ -71,13 +71,14 @@ import { AdminPanelDataTableComponent } from './admin-panel/admin-panel-data-tab
     FlexLayoutModule,
     HttpClientModule,
     AppRoutingModule,
-    MatSnackBarModule,
     AppMaterialModule,
     AppFirebaseModule,
     MatPaginatorModule,
     ReactiveFormsModule,
     BrowserAnimationsModule,
-    ServiceWorkerModule.register('sw-master.js', { enabled: environment.production }),
+    ServiceWorkerModule.register('sw-master.js', {
+      enabled: environment.production,
+    }),
   ],
   providers: [
     SnackBarService,
@@ -88,4 +89,4 @@ import { AdminPanelDataTableComponent } from './admin-panel/admin-panel-data-tab
   bootstrap: [AppComponent],
   entryComponents: [DialogComponent],
 })
-export class AppModule { }
+export class AppModule {}

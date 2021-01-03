@@ -25,6 +25,7 @@ import { MatCheckboxModule } from '@angular/material/checkbox';
 import { MatSortModule } from '@angular/material/sort';
 import { MatPaginator, MatPaginatorModule } from '@angular/material/paginator';
 import { MatSlideToggleModule } from '@angular/material/slide-toggle';
+import { MatSnackBarModule } from '@angular/material/snack-bar';
 
 const modules = [
   MatSortModule,
@@ -44,6 +45,7 @@ const modules = [
   MatDividerModule,
   MatToolbarModule,
   MatCheckboxModule,
+  MatSnackBarModule,
   MatGridListModule,
   MatExpansionModule,
   MatPaginatorModule,
