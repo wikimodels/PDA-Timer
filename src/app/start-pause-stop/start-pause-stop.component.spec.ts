@@ -1,4 +1,4 @@
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
+import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 
 import { StartPauseStopComponent } from './start-pause-stop.component';
 
@@ -6,7 +6,7 @@ describe('StartPauseStopComponent', () => {
   let component: StartPauseStopComponent;
   let fixture: ComponentFixture<StartPauseStopComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [ StartPauseStopComponent ]
     })
